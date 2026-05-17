@@ -1,1 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ajuda-me</title>
 
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+body{background:#eef2f7;}
+
+header{
+background:#1e2a38;
+color:white;
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:relative;
+}
+
+.menu-btn{font-size:28px;cursor:pointer;}
+
+.menu{
+display:none;
+position:absolute;
+top:60px;
+right:10px;
+background:white;
+width:220px;
+border-radius:12px;
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
+overflow:hidden;
+z-index:999;
+}
+
+.menu button{
+width:100%;
+padding:14px;
+border:none;
+background:white;
+text-align:left;
+cursor:pointer;
+}
+
+.menu button:hover{background:#f0f0f0;}
+
+.page{display:none;padding:20px;}
+.active{display:block;}
+
+.card{
+background:white;
+padding:20px;
+border-radius:14px;
+margin-bottom:20px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:10px;
+border:1px solid #ccc;
+}
+
+button{
+padding:12px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+margin-top:10px;
+}
+
+.primary{background:#007bff;color:white;}
+
+.materia-btn{
+width:100%;
+margin-bottom:10px;
+background:#1e2a38;
+color:white;
+}
+
+.editor{
+border:1px solid #ccc;
+padding:15px;
+border-radius:12px;
+min-height:300px;
+background:white;
+line-height:1.6;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>📚 ajuda-me</h2>
+<div class="menu-btn" id="menuBtn">☰</div>
+
+<div class="menu" id="menu">
+<button onclick="showPage('home')">🏠 Home</button>
+<button onclick="showPage('login')">🔑 Login</button>
+<button onclick="showPage('register')">📝 Cadastro</button>
+</div>
+</header>
+
+<!-- HOME -->
+<div class="page active" id="home">
+<div class="card">
+<h2>Bem-vindo</h2>
+<p>Plataforma escolar online</p>
+</div>
+</div>
+
+<!-- LOGIN -->
+<div class="page" id="login">
+<div class="card">
+<h2>🔑 Login</h2>
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Senha">
+<button class="primary" onclick="login()">Entrar</button>
+</div>
+</div>
+
+<!-- CADASTRO -->
+<div class="page" id="register">
+<div class="card">
+<h2>📝 Cadastro</h2>
+<input type="email" id="r_email" placeholder="Email">
+<input type="password" id="r_password" placeholder="Senha">
+<button class="primary" onclick="registerUser()">Criar conta</button>
+</div>
+</div>
+
+<!-- PAINEL ALUNO -->
+<div class="page" id="painelAluno">
+<div class="card">
+<h2>📚 Área do Aluno</h2>
+
+<button class="materia-btn" onclick="abrirMateria('Português')">Português</button>
+<button class="materia-btn" onclick="abrirMateria('Matemática')">Matemática</button>
+<button class="materia-btn" onclick="abrirMateria('Ciências')">Ciências</button>
+<button class="materia-btn" onclick="abrirMateria('História')">História</button>
+<button class="materia-btn" onclick="abrirMateria('Ensino Religioso')">Ensino Religioso</button>
+<button class="materia-btn" onclick="abrirMateria('Geografia')">Geografia</button>
+<button class="materia-btn" onclick="abrirMateria('Artes')">Artes</button>
+<button class="materia-btn" onclick="abrirMateria('Estudos Orientados')">Estudos Orientados</button>
+<button class="materia-btn" onclick="abrirMateria('Inglês')">Inglês</button>
+
+</div>
+
+<div class="card">
+<h2 id="tituloAluno">Selecione uma matéria</h2>
+
+<div class="editor" id="viewer">
+<p>Conteúdo aparecerá aqui...</p>
+</div>
+</div>
+</div>
+
+<!-- PAINEL ADMIN -->
+<div class="page" id="painelAdmin">
+<div class="card">
+<h2>👨‍🏫 Painel Admin</h2>
+
+<button class="materia-btn" onclick="abrirMateriaAdmin('Português')">Português</button>
+<button class="materia-btn" onclick="abrirMateriaAdmin('Matemática')">Matemática</button>
+<button class="materia-btn" onclick="abrirMateriaAdmin('Ciências')">Ciências</button>
+<button class="materia-btn" onclick="abrirMateriaAdmin('História')">História</button>
+<button class="materia-btn" onclick="abrirMateriaAdmin('Ensino Religioso')">Ensino Religioso</button>
+<button class="materia-btn" onclick="abrirMateriaAdmin('Geografia')">Geografia</button>
+<button class="materia-btn" onclick="abrirMateriaAdmin('Artes')">Artes</button>
+<button class="materia-btn" onclick="abrirMateriaAdmin('Estudos Orientados')">Estudos Orientados</button>
+<button class="materia-btn" onclick="abrirMateriaAdmin('Inglês')">Inglês</button>
+
+</div>
+
+<div class="card">
+<h2 id="tituloAdmin">Editor</h2>
+
+<div class="editor" contenteditable="true" id="editor">
+<h3>Selecione uma matéria</h3>
+</div>
+
+<button class="primary" onclick="salvarConteudo()">Salvar Conteúdo</button>
+</div>
+</div>
+
+<!-- FIREBASE -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import {
+getAuth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+
+import {
+getFirestore,
+doc,
+setDoc,
+getDoc
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCqLLNY80PPacb9zFLmCew4hyfeY0UQnAs",
+authDomain: "ensino-62008.firebaseapp.com",
+projectId: "ensino-62008",
+storageBucket: "ensino-62008.appspot.com",
+messagingSenderId: "121950498739",
+appId: "1:121950498739:web:5adedf5cdf2aa71ade65c6"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const adminEmail = "daviwalker813@gmail.com";
+
+// 🔐 SEM VAR GLOBAL QUE QUEBRA MATÉRIA
+let materiaAtualAdmin = null;
+
+// MENU
+const menuBtn = document.getElementById('menuBtn');
+const menu = document.getElementById('menu');
+
+menuBtn.onclick = () => {
+menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+};
+
+window.onclick = (e) => {
+if(e.target !== menuBtn && !menu.contains(e.target)){
+menu.style.display = 'none';
+}
+};
+
+// TROCAR PÁGINA
+window.showPage = function(page){
+document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+document.getElementById(page).classList.add('active');
+menu.style.display = 'none';
+};
+
+// CADASTRO
+window.registerUser = function(){
+const email = document.getElementById('r_email').value;
+const password = document.getElementById('r_password').value;
+
+createUserWithEmailAndPassword(auth, email, password)
+.then(() => {
+alert("Cadastro realizado");
+showPage('login');
+})
+.catch(e => alert(e.message));
+};
+
+// LOGIN
+window.login = function(){
+const email = document.getElementById('email').value;
+const password = document.getElementById('password').value;
+
+signInWithEmailAndPassword(auth, email, password)
+.then((userCredential) => {
+
+const user = userCredential.user;
+
+if(user.email === adminEmail){
+showPage('painelAdmin');
+}else{
+showPage('painelAluno');
+}
+
+})
+.catch(e => alert(e.message));
+};
+
+// SEGURANÇA
+onAuthStateChanged(auth, (user) => {
+
+if(!user){
+showPage('login');
+return;
+}
+
+if(user.email === adminEmail){
+showPage('painelAdmin');
+}else{
+showPage('painelAluno');
+}
+
+});
+
+// ======================
+// 👨‍🏫 ADMIN ABRE MATÉRIA
+// ======================
+window.abrirMateriaAdmin = async function(nome){
+
+materiaAtualAdmin = nome;
+
+document.getElementById("tituloAdmin").innerText = "Editando: " + nome;
+
+const ref = doc(db, "materias", nome);
+const snap = await getDoc(ref);
+
+if(snap.exists()){
+document.getElementById("editor").innerHTML = snap.data().conteudo;
+}else{
+document.getElementById("editor").innerHTML = "<h3>Escreva conteúdo</h3>";
+}
+};
+
+// 💾 SALVAR (FIXO POR MATÉRIA)
+window.salvarConteudo = async function(){
+
+if(!materiaAtualAdmin){
+alert("Escolha uma matéria");
+return;
+}
+
+const texto = document.getElementById("editor").innerHTML;
+
+await setDoc(doc(db, "materias", materiaAtualAdmin), {
+conteudo: texto
+});
+
+alert("Conteúdo salvo em " + materiaAtualAdmin);
+};
+
+// ======================
+// 👨‍🎓 ALUNO
+// ======================
+window.abrirMateria = async function(nome){
+
+document.getElementById("tituloAluno").innerText = nome;
+
+const ref = doc(db, "materias", nome);
+const snap = await getDoc(ref);
+
+if(snap.exists()){
+document.getElementById("viewer").innerHTML = snap.data().conteudo;
+}else{
+document.getElementById("viewer").innerHTML = "<p>Sem conteúdo ainda</p>";
+}
+};
+
+</script>
+
+</body>
+</html>
