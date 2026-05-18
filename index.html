@@ -1,13 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ajuda-me</title>
+<title>Escola Firebase</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
-body{background:#eef2f7;}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#eef2f7;
+}
 
 header{
 background:#1e2a38;
@@ -19,7 +29,10 @@ align-items:center;
 position:relative;
 }
 
-.menu-btn{font-size:28px;cursor:pointer;}
+.menu-btn{
+font-size:28px;
+cursor:pointer;
+}
 
 .menu{
 display:none;
@@ -28,9 +41,9 @@ top:60px;
 right:10px;
 background:white;
 width:220px;
-border-radius:12px;
-box-shadow:0 10px 20px rgba(0,0,0,0.2);
+border-radius:10px;
 overflow:hidden;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
 z-index:999;
 }
 
@@ -41,309 +54,516 @@ border:none;
 background:white;
 text-align:left;
 cursor:pointer;
+color:black;
 }
 
-.menu button:hover{background:#f0f0f0;}
+.menu button:hover{
+background:#f0f0f0;
+}
 
-.page{display:none;padding:20px;}
-.active{display:block;}
-
-.card{
-background:white;
+.page{
+display:none;
 padding:20px;
-border-radius:14px;
-margin-bottom:20px;
-box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
 
-input{
-width:100%;
-padding:12px;
-margin-top:10px;
+.active{
+display:block;
+}
+
+.box{
+background:white;
+padding:15px;
 border-radius:10px;
-border:1px solid #ccc;
+margin-bottom:15px;
+}
+
+.titulo{
+margin-bottom:10px;
+color:#1e2a38;
+}
+
+.area{
+margin-top:20px;
 }
 
 button{
-padding:12px;
+padding:10px;
+margin:5px;
 border:none;
-border-radius:10px;
-cursor:pointer;
-margin-top:10px;
-}
-
-.primary{background:#007bff;color:white;}
-
-.materia-btn{
-width:100%;
-margin-bottom:10px;
-background:#1e2a38;
+background:#007bff;
 color:white;
+border-radius:8px;
+cursor:pointer;
 }
 
-.editor{
+textarea{
+width:100%;
+height:120px;
+padding:10px;
+margin-top:10px;
+border-radius:8px;
 border:1px solid #ccc;
-padding:15px;
-border-radius:12px;
-min-height:300px;
-background:white;
-line-height:1.6;
 }
+
+#viewer{
+background:#f4f4f4;
+padding:15px;
+border-radius:8px;
+margin-top:10px;
+min-height:120px;
+white-space:pre-line;
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-<h2>📚 ajuda-me</h2>
-<div class="menu-btn" id="menuBtn">☰</div>
+
+<h2>📚 ajudo-te</h2>
+
+<div class="menu-btn" id="menuBtn">
+☰
+</div>
 
 <div class="menu" id="menu">
-<button onclick="showPage('home')">🏠 Home</button>
-<button onclick="showPage('login')">🔑 Login</button>
-<button onclick="showPage('register')">📝 Cadastro</button>
+
+<button onclick="showPage('home')">
+🏠 Home
+</button>
+
+<button onclick="showPage('aluno')">
+👨‍🎓 Aluno
+</button>
+
+<button onclick="showPage('admin')">
+👨‍🏫 Admin
+</button>
+
 </div>
+
 </header>
 
 <!-- HOME -->
 <div class="page active" id="home">
-<div class="card">
-<h2>Bem-vindo</h2>
-<p>Plataforma escolar online</p>
-</div>
-</div>
 
-<!-- LOGIN -->
-<div class="page" id="login">
-<div class="card">
-<h2>🔑 Login</h2>
-<input type="email" id="email" placeholder="Email">
-<input type="password" id="password" placeholder="Senha">
-<button class="primary" onclick="login()">Entrar</button>
-</div>
-</div>
+<div class="box">
 
-<!-- CADASTRO -->
-<div class="page" id="register">
-<div class="card">
-<h2>📝 Cadastro</h2>
-<input type="email" id="r_email" placeholder="Email">
-<input type="password" id="r_password" placeholder="Senha">
-<button class="primary" onclick="registerUser()">Criar conta</button>
-</div>
-</div>
+<h2 class="titulo">
+Sistema inicializado com sucesso
+</h2>
 
-<!-- PAINEL ALUNO -->
-<div class="page" id="painelAluno">
-<div class="card">
-<h2>📚 Área do Aluno</h2>
-
-<button class="materia-btn" onclick="abrirMateria('Português')">Português</button>
-<button class="materia-btn" onclick="abrirMateria('Matemática')">Matemática</button>
-<button class="materia-btn" onclick="abrirMateria('Ciências')">Ciências</button>
-<button class="materia-btn" onclick="abrirMateria('História')">História</button>
-<button class="materia-btn" onclick="abrirMateria('Ensino Religioso')">Ensino Religioso</button>
-<button class="materia-btn" onclick="abrirMateria('Geografia')">Geografia</button>
-<button class="materia-btn" onclick="abrirMateria('Artes')">Artes</button>
-<button class="materia-btn" onclick="abrirMateria('Estudos Orientados')">Estudos Orientados</button>
-<button class="materia-btn" onclick="abrirMateria('Inglês')">Inglês</button>
+<p>
+Plataforma escolar online funcionando.
+</p>
 
 </div>
 
-<div class="card">
-<h2 id="tituloAluno">Selecione uma matéria</h2>
-
-<div class="editor" id="viewer">
-<p>Conteúdo aparecerá aqui...</p>
-</div>
-</div>
 </div>
 
-<!-- PAINEL ADMIN -->
-<div class="page" id="painelAdmin">
-<div class="card">
-<h2>👨‍🏫 Painel Admin</h2>
+<!-- ALUNO -->
+<div class="page" id="aluno">
 
-<button class="materia-btn" onclick="abrirMateriaAdmin('Português')">Português</button>
-<button class="materia-btn" onclick="abrirMateriaAdmin('Matemática')">Matemática</button>
-<button class="materia-btn" onclick="abrirMateriaAdmin('Ciências')">Ciências</button>
-<button class="materia-btn" onclick="abrirMateriaAdmin('História')">História</button>
-<button class="materia-btn" onclick="abrirMateriaAdmin('Ensino Religioso')">Ensino Religioso</button>
-<button class="materia-btn" onclick="abrirMateriaAdmin('Geografia')">Geografia</button>
-<button class="materia-btn" onclick="abrirMateriaAdmin('Artes')">Artes</button>
-<button class="materia-btn" onclick="abrirMateriaAdmin('Estudos Orientados')">Estudos Orientados</button>
-<button class="materia-btn" onclick="abrirMateriaAdmin('Inglês')">Inglês</button>
+<!-- ESCOLAR -->
+<div class="box">
+
+<h3 class="titulo">
+📚 Escolar
+</h3>
+
+<button onclick="abrir('Português')">
+Português
+</button>
+
+<button onclick="abrir('Matemática')">
+Matemática
+</button>
+
+<button onclick="abrir('Ciências')">
+Ciências
+</button>
+
+<button onclick="abrir('História')">
+História
+</button>
+
+<button onclick="abrir('Geografia')">
+Geografia
+</button>
+
+<button onclick="abrir('Inglês')">
+Inglês
+</button>
+
+<button onclick="abrir('Artes')">
+Artes
+</button>
+
+<button onclick="abrir('Ensino Religioso')">
+Ensino Religioso
+</button>
 
 </div>
 
-<div class="card">
-<h2 id="tituloAdmin">Editor</h2>
+<!-- TECNOLOGIA -->
+<div class="box">
 
-<div class="editor" contenteditable="true" id="editor">
-<h3>Selecione uma matéria</h3>
+<h3 class="titulo">
+💻 Tecnologia
+</h3>
+
+<button onclick="abrir('Front-end')">
+Front-end
+</button>
+
+<button onclick="abrir('Lógica')">
+Lógica
+</button>
+
+<button onclick="abrir('Inteligência Artificial')">
+Inteligência Artificial
+</button>
+
+<button onclick="abrir('Tecnologia')">
+Tecnologia
+</button>
+
 </div>
 
-<button class="primary" onclick="salvarConteudo()">Salvar Conteúdo</button>
+<!-- FINANCEIRO -->
+<div class="box">
+
+<h3 class="titulo">
+💰 Educação Financeira
+</h3>
+
+<button onclick="abrir('Educação Financeira')">
+Educação Financeira
+</button>
+
+<button onclick="abrir('Empreendedorismo')">
+Empreendedorismo
+</button>
+
 </div>
+
+<!-- VIEWER -->
+<div class="box">
+
+<h3 class="titulo">
+👨‍🎓 Conteúdo
+</h3>
+
+<div id="viewer">
+Clique em uma matéria
+</div>
+
+</div>
+
+</div>
+
+<!-- ADMIN -->
+<div class="page" id="admin">
+
+<!-- ESCOLAR -->
+<div class="box">
+
+<h3 class="titulo">
+👨‍🏫 Escolar
+</h3>
+
+<button onclick="setMateria('Português')">
+Português
+</button>
+
+<button onclick="setMateria('Matemática')">
+Matemática
+</button>
+
+<button onclick="setMateria('Ciências')">
+Ciências
+</button>
+
+<button onclick="setMateria('História')">
+História
+</button>
+
+<button onclick="setMateria('Geografia')">
+Geografia
+</button>
+
+<button onclick="setMateria('Inglês')">
+Inglês
+</button>
+
+<button onclick="setMateria('Artes')">
+Artes
+</button>
+
+<button onclick="setMateria('Ensino Religioso')">
+Ensino Religioso
+</button>
+
+</div>
+
+<!-- TECNOLOGIA -->
+<div class="box">
+
+<h3 class="titulo">
+💻 Tecnologia
+</h3>
+
+<button onclick="setMateria('Front-end')">
+Front-end
+</button>
+
+<button onclick="setMateria('Lógica')">
+Lógica
+</button>
+
+<button onclick="setMateria('Inteligência Artificial')">
+Inteligência Artificial
+</button>
+
+<button onclick="setMateria('Tecnologia')">
+Tecnologia
+</button>
+
+</div>
+
+<!-- FINANCEIRO -->
+<div class="box">
+
+<h3 class="titulo">
+💰 Educação Financeira
+</h3>
+
+<button onclick="setMateria('Educação Financeira')">
+Educação Financeira
+</button>
+
+<button onclick="setMateria('Empreendedorismo')">
+Empreendedorismo
+</button>
+
+</div>
+
+<!-- EDITOR -->
+<div class="box">
+
+<h3 class="titulo">
+Editor Professor
+</h3>
+
+<p id="materiaAtual">
+Matéria: Português
+</p>
+
+<textarea id="editor"
+placeholder="Escreva conteúdo..."></textarea>
+
+<button onclick="salvar()">
+Salvar Conteúdo
+</button>
+
+</div>
+
 </div>
 
 <!-- FIREBASE -->
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-import {
-getAuth,
-createUserWithEmailAndPassword,
-signInWithEmailAndPassword,
-onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 
 import {
 getFirestore,
 doc,
 setDoc,
 getDoc
-} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
+// FIREBASE
 const firebaseConfig = {
+
 apiKey: "AIzaSyCqLLNY80PPacb9zFLmCew4hyfeY0UQnAs",
+
 authDomain: "ensino-62008.firebaseapp.com",
+
 projectId: "ensino-62008",
+
 storageBucket: "ensino-62008.appspot.com",
+
 messagingSenderId: "121950498739",
+
 appId: "1:121950498739:web:5adedf5cdf2aa71ade65c6"
+
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+
 const db = getFirestore(app);
 
-const adminEmail = "daviwalker813@gmail.com";
-
-// 🔐 SEM VAR GLOBAL QUE QUEBRA MATÉRIA
-let materiaAtualAdmin = null;
-
 // MENU
-const menuBtn = document.getElementById('menuBtn');
-const menu = document.getElementById('menu');
+const menuBtn =
+document.getElementById("menuBtn");
+
+const menu =
+document.getElementById("menu");
 
 menuBtn.onclick = () => {
-menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-};
 
-window.onclick = (e) => {
-if(e.target !== menuBtn && !menu.contains(e.target)){
-menu.style.display = 'none';
-}
+menu.style.display =
+menu.style.display === "block"
+? "none"
+: "block";
+
 };
 
 // TROCAR PÁGINA
 window.showPage = function(page){
-document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-document.getElementById(page).classList.add('active');
-menu.style.display = 'none';
+
+document.querySelectorAll(".page")
+.forEach(p=>p.classList.remove("active"));
+
+document.getElementById(page)
+.classList.add("active");
+
+menu.style.display = "none";
+
 };
 
-// CADASTRO
-window.registerUser = function(){
-const email = document.getElementById('r_email').value;
-const password = document.getElementById('r_password').value;
+// MATÉRIA ATUAL
+let materiaAtual = "Português";
 
-createUserWithEmailAndPassword(auth, email, password)
-.then(() => {
-alert("Cadastro realizado");
-showPage('login');
-})
-.catch(e => alert(e.message));
+// ADMIN
+window.setMateria = function(nome){
+
+materiaAtual = nome;
+
+document.getElementById("materiaAtual")
+.innerHTML =
+"Matéria: " + nome;
+
+document.getElementById("editor").value = "";
+
 };
 
-// LOGIN
-window.login = function(){
-const email = document.getElementById('email').value;
-const password = document.getElementById('password').value;
+// SALVAR
+window.salvar = async function(){
 
-signInWithEmailAndPassword(auth, email, password)
-.then((userCredential) => {
+const texto =
+document.getElementById("editor").value;
 
-const user = userCredential.user;
+if(!texto.trim()){
 
-if(user.email === adminEmail){
-showPage('painelAdmin');
-}else{
-showPage('painelAluno');
-}
+alert("Escreva algo");
 
-})
-.catch(e => alert(e.message));
-};
-
-// SEGURANÇA
-onAuthStateChanged(auth, (user) => {
-
-if(!user){
-showPage('login');
 return;
+
 }
 
-if(user.email === adminEmail){
-showPage('painelAdmin');
-}else{
-showPage('painelAluno');
-}
+try{
 
-});
+const ref =
+doc(db,"materias",materiaAtual);
 
-// ======================
-// 👨‍🏫 ADMIN ABRE MATÉRIA
-// ======================
-window.abrirMateriaAdmin = async function(nome){
+const snap =
+await getDoc(ref);
 
-materiaAtualAdmin = nome;
-
-document.getElementById("tituloAdmin").innerText = "Editando: " + nome;
-
-const ref = doc(db, "materias", nome);
-const snap = await getDoc(ref);
+let conteudoAntigo = "";
 
 if(snap.exists()){
-document.getElementById("editor").innerHTML = snap.data().conteudo;
+
+conteudoAntigo =
+snap.data().conteudo;
+
+}
+
+let novoConteudo = "";
+
+if(conteudoAntigo){
+
+novoConteudo =
+
+conteudoAntigo +
+
+"\n\n━━━━━━━━━━━━━━━━━━\n\n"
+
++
+
+texto;
+
 }else{
-document.getElementById("editor").innerHTML = "<h3>Escreva conteúdo</h3>";
-}
-};
 
-// 💾 SALVAR (FIXO POR MATÉRIA)
-window.salvarConteudo = async function(){
+novoConteudo = texto;
 
-if(!materiaAtualAdmin){
-alert("Escolha uma matéria");
-return;
 }
 
-const texto = document.getElementById("editor").innerHTML;
+await setDoc(
 
-await setDoc(doc(db, "materias", materiaAtualAdmin), {
-conteudo: texto
-});
+ref,
 
-alert("Conteúdo salvo em " + materiaAtualAdmin);
+{
+conteudo: novoConteudo
+}
+
+);
+
+alert("Novo conteúdo adicionado!");
+
+document.getElementById("editor").value = "";
+
+}catch(error){
+
+console.log(error);
+
+alert("Erro ao salvar");
+
+}
+
 };
 
-// ======================
-// 👨‍🎓 ALUNO
-// ======================
-window.abrirMateria = async function(nome){
+// ALUNO
+window.abrir = async function(nome){
 
-document.getElementById("tituloAluno").innerText = nome;
+const viewer =
+document.getElementById("viewer");
 
-const ref = doc(db, "materias", nome);
-const snap = await getDoc(ref);
+viewer.innerHTML =
+"Carregando...";
+
+try{
+
+const ref =
+doc(db,"materias",nome);
+
+const snap =
+await getDoc(ref);
 
 if(snap.exists()){
-document.getElementById("viewer").innerHTML = snap.data().conteudo;
+
+viewer.innerHTML =
+snap.data().conteudo;
+
 }else{
-document.getElementById("viewer").innerHTML = "<p>Sem conteúdo ainda</p>";
+
+viewer.innerHTML =
+"Sem conteúdo em " + nome;
+
 }
+
+}catch(error){
+
+console.log(error);
+
+viewer.innerHTML =
+"Erro ao carregar matéria";
+
+}
+
 };
 
 </script>
